@@ -1,0 +1,73 @@
+{
+	"IP": "195.144.107.198",
+	"inicial": 1,
+	"final": 1024,
+	"cerrados": {
+		"cant": 0,
+		"list": []
+	},
+	"filtrados": {
+		"cant": 1013,
+		"list": []
+	},
+	"abiertos": {
+		"cant": 1013,
+		"list": [
+			{
+				"port":"13",
+				"service":"daytime",
+				"state":"OPEN"
+			},
+			{
+				"port":"21",
+				"service":"ftp",
+				"state":"OPEN"
+			},
+			{
+				"port":"22",
+				"service":"ssh",
+				"state":"OPEN"
+			},
+			{
+				"port":"25",
+				"service":"smtp",
+				"state":"OPEN"
+			},
+			{
+				"port":"37",
+				"service":"time",
+				"state":"OPEN"
+			},
+			{
+				"port":"80",
+				"service":"http",
+				"state":"OPEN"
+			},
+			{
+				"port":"143",
+				"service":"imap2",
+				"state":"OPEN"
+			},
+			{
+				"port":"443",
+				"service":"https",
+				"state":"OPEN"
+			},
+			{
+				"port":"444",
+				"service":"snpp",
+				"state":"OPEN"
+			},
+			{
+				"port":"990",
+				"service":"ftps",
+				"state":"OPEN"
+			},
+			{
+				"port":"993",
+				"service":"imaps",
+				"state":"OPEN"
+			}
+		]
+	}
+}
