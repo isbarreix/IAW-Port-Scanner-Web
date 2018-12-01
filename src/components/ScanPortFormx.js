@@ -10,15 +10,14 @@ class ScanPortFormx extends Component {
 		  portInitial: '1',
 		  portFinal: '1000',
 	  };
-	  
-	  
+  
 	  // linkeamos handleInput al componente
 	  this.handleInputChange  = this.handleInputChange.bind(this);
 	  this.handleUseMyIP = this.handleUseMyIP.bind(this);
 	  this.handlePortsToScanChange = this.handlePortsToScanChange.bind(this);
 	  this.handleSubmit = this.handleSubmit.bind(this);
-	  
-  }
+	}
+	
 	
   handleInputChange(e) {
 	  const {	value, name	} = e.target;
@@ -61,19 +60,50 @@ class ScanPortFormx extends Component {
     }
   }
   handleSubmit(e) {
-    // 	aca se deberia hacer un autoscroll a #Reporte como se tiene en los href.
+		console.log(this.state);	// De prueba, aqui se llamaria al server y se obtendria el .json
+		e.preventDefault();	// evita refrescar la pantalla al hacer submit
+		
+		//scroll al reporte
+		$('html, body').animate({
+			scrollTop: $("#Report").offset().top
+		}, 1500);
+
+		/**
+		 * Inicializo el mensaje IP - Rango
+		 */
+		
+		this.host = this.state.ip;
+		this.host = this.host.concat("-");
+		this.pinicio = this.state.portInitial;
+		this.fin = this.state.portFinal;
+		
+		this.host = this.host.concat(this.pinicio);
+		this.host = this.host.concat(":");
+		var mensaje = this.host.concat(this.fin);
+		
+		console.log(mensaje);
+		/** 
+		 * Creo el socket y le envío el mensaje
+		*/
+		var socket = new WebSocket('ws://127.0.0.1:4565');
+		
+		socket.onopen = function () {
+			console.log("Ready to go");
+			console.log(socket.readyState);  
+			socket.send(mensaje);
+		};
+
+		socket.onmessage = function (event) {
+			var json_puertos = JSON.parse(event.data);
+			console.log(json_puertos);
+			socket.close();
+		};
+		
+		socket.onclose = function (event) {
+			console.log("WebSocket is closed now.");
+		};
+	}
 	
-	e.preventDefault();	// evita refrescar la pantalla al hacer submit
-    console.log(this.state);	// De prueba, aqui se llamaria al server y se obtendria el .json
-	
-    /*this.props.onAddTodo(this.state); 
-    this.setState({
-      title: '',
-      responsible: '',
-      description: '',
-      priority: 'low'
-    });*/
-  }
 	  
 
 
@@ -144,7 +174,7 @@ class ScanPortFormx extends Component {
 						  />
 						</div>
 					  </div>
-					  <button type="submit" className="btn btn-light">
+					  <button type="submit" className="btn btn-light"> 
 						Comenzar análisis
 					  </button>
 					</form>
