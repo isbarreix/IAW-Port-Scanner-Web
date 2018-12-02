@@ -12,14 +12,29 @@ import Reportx from './components/Reportx';
 import Downloadx from './components/Downloadx';
 
 class App extends Component {
+	constructor(){
+		super();
+		this.state = {
+			host:''
+		}
+		this.handleOnScan = this.handleOnScan.bind(this);
+	}
+
+	handleOnScan(scannedHost){
+		this.setState({
+				host: scannedHost
+		})
+
+	}
+
   render() {
     return (
 		<div className="App">
 			<Navx/>
 			<Headerx/>
 			<Featuresx/>
-			<ScanPortFormx/>
-			<Reportx/>
+			<ScanPortFormx onScan = {this.handleOnScan}/>
+			<Reportx host = {this.state.host}/>
 			<Downloadx/>
 			<Teamx/>
 			<Contactx/>

@@ -8,7 +8,7 @@ class ScanPortFormx extends Component {
 	  this.state = {
 		  ip: '127.0.0.1',
 		  portInitial: '1',
-		  portFinal: '1000',
+			portFinal: '1000',
 	  };
   
 	  // linkeamos handleInput al componente
@@ -22,8 +22,7 @@ class ScanPortFormx extends Component {
   handleInputChange(e) {
 	  const {	value, name	} = e.target;
 	  this.setState({
-		  [name]: value
-		  
+		  [name]: value 
 	  });
 
   }
@@ -34,12 +33,10 @@ class ScanPortFormx extends Component {
       url: 'https://ipinfo.io/json', 
       async: false
      }).responseJSON;
-    //console.log(value.ip);
     this.setState({
         'ip': ipinfo.ip
     }, () => {
         $('[name="portInitial"]').prop('value', ipinfo.ip);
-            //console.log(this.state);
     })
   }
   
@@ -50,7 +47,6 @@ class ScanPortFormx extends Component {
 			'portInitial': '0',
 			'portFinal': '1000'
 		}, () => {
-            //console.log(this.state);
             $('[name="portInitial"]').prop('disabled', true);
             $('[name="portFinal"]').prop('disabled', true);
         })
@@ -60,14 +56,8 @@ class ScanPortFormx extends Component {
     }
   }
   handleSubmit(e) {
-		console.log(this.state);	// De prueba, aqui se llamaria al server y se obtendria el .json
 		e.preventDefault();	// evita refrescar la pantalla al hacer submit
-		
-		//scroll al reporte
-		$('html, body').animate({
-			scrollTop: $("#Report").offset().top
-		}, 1500);
-
+	
 		/**
 		 * Inicializo el mensaje IP - Rango
 		 */
@@ -79,9 +69,8 @@ class ScanPortFormx extends Component {
 		
 		this.host = this.host.concat(this.pinicio);
 		this.host = this.host.concat(":");
-		var mensaje = this.host.concat(this.fin);
-		
-		console.log(mensaje);
+		var mensaje = this.host.concat(this.fin);		
+	
 		/** 
 		 * Creo el socket y le envío el mensaje
 		*/
@@ -92,11 +81,14 @@ class ScanPortFormx extends Component {
 			console.log(socket.readyState);  
 			socket.send(mensaje);
 		};
-
-		socket.onmessage = function (event) {
-			var json_puertos = JSON.parse(event.data);
-			console.log(json_puertos);
-			socket.close();
+		var json_puertos;
+		socket.onmessage = (event) => {
+			json_puertos = JSON.parse(event.data);
+			this.props.onScan(json_puertos);
+			//scroll al reporte cuando ya se pudo obtener el json
+			$('html, body').animate({
+				scrollTop: $("#Report").offset().top
+			}, 1500);
 		};
 		
 		socket.onclose = function (event) {
