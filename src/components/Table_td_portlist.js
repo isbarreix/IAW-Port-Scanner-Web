@@ -9,9 +9,7 @@ class Table_td_portlist extends Component {
       <td>{ open.port  }</td>
       <td>{ open.service  }</td>
       <td>{ open.state  }</td>
-      <td><a href="#scan" className="btn btn-info">PING</a></td>
       </tr>                                    
-
     );
     return(
        openListPorts  

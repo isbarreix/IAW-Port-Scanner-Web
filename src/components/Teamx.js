@@ -20,14 +20,14 @@ class Teamx extends Component {
                         <p>CEO Spyglass</p>
                     </div>
                     <div className="team col-sm-3 mt-2 wow fadeIn">
-                        <img src="img/team-4.jpg" alt="Male" className="img-team img-fluid rounded-circle"/>
-                        <h5>Kathrine Kaif</h5>
-                        <p>Marketing Head</p>
+                        <img src="img/diego.png" alt="Male" className="img-team img-fluid rounded-circle"/>
+                        <h5>Martínez Diego</h5>
+                        <p>Profesor Adjunto DE</p>
                     </div>
                     <div className="team col-sm-3 mt-2 wow fadeIn">
-                        <img src="img/team-2.jpg" alt="Male" className="img-team img-fluid rounded-circle"/>
-                        <h5>Brandon Lee</h5>
-                        <p>Lead Developer</p>
+                        <img src="img/tuki.png" alt="Male" className="img-team img-fluid rounded-circle"/>
+                        <h5>Tucat Mariano</h5>
+                        <p>Asistente</p>
                     </div>
                     <div className="team col-sm-3 mt-2 wow fadeInRight">
                         <img src="img/team-3.jpg" alt="Male" className="img-team img-fluid rounded-circle"/>
