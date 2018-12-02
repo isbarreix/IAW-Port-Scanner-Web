@@ -7,7 +7,9 @@ class Navx extends Component {
             <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="ion-grid icon-sm"></span>
             </button>
-            <a className="navbar-brand hero-heading" href="#main">SPYGLASS</a>
+            <a className="navbar-brand hero-heading page-scroll" href="#main">
+            <img className="img-fluid mx-auto d-block" src="img/product3.png" height="50" width="100" alt="prduct"/>
+            </a>
             <div className="collapse navbar-collapse" id="navbarCollapse">
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item mr-3">
