@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import CardHeaderRow from './Card_Header_Row';
 
 class HostInfox extends Component {
-    constructor() {
-      super();
-    }
-
     render() {
         if(this.props.hostInfo !== undefined){
             return (
@@ -22,9 +18,9 @@ class HostInfox extends Component {
                                 <CardHeaderRow name="IP analizada:"  data={ this.props.hostInfo.ip }/>
                                 <CardHeaderRow name="HostName:"  data={ this.props.hostInfo.hostname }/>
                                 <CardHeaderRow name="Ciudad:"  data={ this.props.hostInfo.city }/>
-                                <CardHeaderRow name="Region:"  data={ this.props.hostInfo.region }/>
+                                <CardHeaderRow name="Región:"  data={ this.props.hostInfo.region }/>
                                 <CardHeaderRow name="País:"  data={ this.props.hostInfo.country }/>
-                                <CardHeaderRow name="Ubicación (LAT/LONG):"  data={ this.props.hostInfo.loc }/>
+                                <CardHeaderRow name="Ubicación (Latitud/Longitud):"  data={ this.props.hostInfo.loc }/>
                                 <CardHeaderRow name="Código Postal:"  data={ this.props.hostInfo.postal }/>
                                 <CardHeaderRow name="Organización:"  data={ this.props.hostInfo.org }/>
                             </div>

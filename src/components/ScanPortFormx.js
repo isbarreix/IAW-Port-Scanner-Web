@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+import ReactLoading from "react-loading";
+import { Section , Article} from "./generic";
 
 class ScanPortFormx extends Component {
 	
@@ -9,13 +11,14 @@ class ScanPortFormx extends Component {
 		  ip: '127.0.0.1',
 		  portInitial: '1',
 			portFinal: '1000',
+			loading: false,
 	  };
   
 	  // linkeamos handleInput al componente
 	  this.handleInputChange  = this.handleInputChange.bind(this);
 	  this.handleUseMyIP = this.handleUseMyIP.bind(this);
 	  this.handlePortsToScanChange = this.handlePortsToScanChange.bind(this);
-	  this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	
 	
@@ -54,7 +57,8 @@ class ScanPortFormx extends Component {
             $('[name="portInitial"]').prop('disabled', false);
             $('[name="portFinal"]').prop('disabled', false);
     }
-  }
+	}
+
   handleSubmit(e) {
 		e.preventDefault();	// evita refrescar la pantalla al hacer submit
 	
@@ -70,12 +74,21 @@ class ScanPortFormx extends Component {
 		this.host = this.host.concat(this.pinicio);
 		this.host = this.host.concat(":");
 		var mensaje = this.host.concat(this.fin);		
-	
+
+
+		/**
+		 * Seteo la aparicion del loading
+		*/
+			
+		this.setState({
+			loading: true
+		});
+
 		/** 
 		 * Creo el socket y le envío el mensaje
 		*/
 		var socket = new WebSocket('ws://127.0.0.1:4565');
-		
+
 		socket.onopen = function () {
 			console.log("Ready to go");
 			console.log(socket.readyState);  
@@ -85,6 +98,14 @@ class ScanPortFormx extends Component {
 		socket.onmessage = (event) => {
 			json_puertos = JSON.parse(event.data);
 			this.props.onScan(json_puertos);
+
+			/**
+			 * Quito el loading
+			 */
+			this.setState({
+				loading: false
+			});
+
 			//scroll al reporte cuando ya se pudo obtener el json
 			$('html, body').animate({
 				scrollTop: $("#Report").offset().top
@@ -170,14 +191,28 @@ class ScanPortFormx extends Component {
 						Comenzar análisis
 					  </button>
 					</form>
-
 						<img className="center img-fluid overlay wow bounceInRight" src="img/form2.png" alt="form"/>
-
 				</div>
+						{
+								this.state.loading &&	 <Loadingx/>	
+						}
             </div>
         </section>
     );
   }
+}
+
+class Loadingx extends React.Component{
+	render(){
+		return(	
+			<Section>
+					<Article>
+							<ReactLoading type="spinningBubbles" color="#007bff" />
+							Procesando puertos...
+					</Article>
+			</Section>
+		);
+	}
 }
 
 export default ScanPortFormx;

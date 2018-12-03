@@ -34,13 +34,10 @@ class App extends Component {
 	}
 
 	handleOnSpyGlass(hostInfo){
-
 		this.setState({
 			info: hostInfo,
 			showInfo: true,
-		}, function () {
-			console.log(this.state);
-	});
+		});
 	}
 
   render() {

@@ -12,8 +12,8 @@ class Downloadx extends Component {
 							Descargá gratis SPYGLASS para escanear direcciones IP y puertos a la mayor velocidad posible.
                         </p>
                         <p className="mt-5">
-                            <a href={null} className="mr-2"><img src="img/google-play.png" className="store-img" alt="androidownload"/></a>
-                            <a href={null}><img src="img/apple_store.png" className="store-img" alt="appledownload"/> </a>
+                            <a href="#main" className="mr-2 page-scroll"><img src="img/google-play.png" className="store-img" alt="androidownload"/></a>
+                            <a href="#main" className="page-scroll"><img src="img/apple_store.png" className="store-img" alt="appledownload"/> </a>
                         </p>
                     </div>
                 </div>
