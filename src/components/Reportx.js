@@ -32,7 +32,13 @@ class Reportx extends Component {
         async: false
         }).responseJSON;
 
-        this.props.onSpyGlass(extraInfo);
+      var d = 'http://api.ipstack.com/'+this.props.host.IP+'?access_key=d15c1d6c863e4095975759d1304ab15e';
+      const moreInfo = $.ajax({ 
+        url: d, 
+        async: false
+        }).responseJSON;
+        console.log(moreInfo);
+        this.props.onSpyGlass(extraInfo, moreInfo);
         
         $('html, body').animate({
           scrollTop: $("#DataExtra").offset().top

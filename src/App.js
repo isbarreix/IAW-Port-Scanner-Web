@@ -18,6 +18,7 @@ class App extends Component {
 		this.state = {
 			host:'',
 			info:'',
+			extraInfo:'',
 			showReport:'',
 			showInfo:'',
 		}
@@ -33,9 +34,10 @@ class App extends Component {
 
 	}
 
-	handleOnSpyGlass(hostInfo){
+	handleOnSpyGlass(hostInfo, moreInfo){
 		this.setState({
 			info: hostInfo,
+			extraInfo: moreInfo,
 			showInfo: true,
 		});
 	}
@@ -48,7 +50,7 @@ class App extends Component {
 			<Featuresx/>
 			<ScanPortFormx onScan = {this.handleOnScan}/>
 			{ this.state.showReport?<Reportx host = {this.state.host} onSpyGlass = {this.handleOnSpyGlass}/>:null}
-			{ this.state.showInfo?<HostInfox hostInfo = {this.state.info}/> : <HostInfox/> }
+			{ this.state.showInfo?<HostInfox hostInfo = {this.state.info} extraInfo = {this.state.extraInfo}/> : <HostInfox/> }
 			<Downloadx/>
 			<Teamx/>
 			<Contactx/>

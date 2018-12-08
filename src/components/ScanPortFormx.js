@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import ReactLoading from "react-loading";
-import { Section , Article} from "./generic";
+import Loadingx from './Loadingx';
+
 
 class ScanPortFormx extends Component {
 	
   constructor () {
 	  super();
 	  this.state = {
-		  ip: '127.0.0.1',
-		  portInitial: '1',
-			portFinal: '1000',
+		  ip: '200.49.224.150',
+		  portInitial: '79',
+			portFinal: '82',
 			loading: false,
 	  };
   
@@ -194,25 +194,14 @@ class ScanPortFormx extends Component {
 						<img className="center img-fluid overlay wow bounceInRight" src="img/form2.png" alt="form"/>
 				</div>
 						{
-								this.state.loading &&	 <Loadingx/>	
+								this.state.loading &&	 <Loadingx time = {this.state.portFinal - this.state.portInitial}/>
+								
 						}
+						
             </div>
         </section>
     );
   }
-}
-
-class Loadingx extends React.Component{
-	render(){
-		return(	
-			<Section>
-					<Article>
-							<ReactLoading type="spinningBubbles" color="#007bff" />
-							Procesando puertos...
-					</Article>
-			</Section>
-		);
-	}
 }
 
 export default ScanPortFormx;
