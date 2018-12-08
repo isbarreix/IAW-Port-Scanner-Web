@@ -2,22 +2,23 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import Loadingx from './Loadingx';
 
-class ScanPortFormx extends Component {
-	
+
+class ScanPortFormx extends Component {	
   constructor () {
 	  super();
 	  this.state = {
 		  ip: '200.49.224.150',
-		  portInitial: '79',
-			portFinal: '82',
+		  portInitial: '75',
+			portFinal: '85',
 			loading: false,
+			serverOff:''
 	  };
   
 	  // linkeamos handleInput al componente
 	  this.handleInputChange  = this.handleInputChange.bind(this);
 	  this.handleUseMyIP = this.handleUseMyIP.bind(this);
 	  this.handlePortsToScanChange = this.handlePortsToScanChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+	  this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	
 	
@@ -64,11 +65,10 @@ class ScanPortFormx extends Component {
 		 * Creo el socket y le envío el mensaje
 		*/
 		var socket = new WebSocket('ws://127.0.0.1:4565');
-        socket.onerror = function () {
-            console.log("Servidor no disponible");
-        };    
+        socket.onerror =  () => {
+		console.log("Error al conectar con el servidor");
+		};    
     
-        if(socket.readyState === 1) {
           
           /**
            * Inicializo el mensaje IP - Rango
@@ -89,20 +89,22 @@ class ScanPortFormx extends Component {
           var mensaje = this.host.concat(this.fin);		
 
 
-          /**
-           * Seteo la aparicion del loading
-          */
-
-          this.setState({
-              loading: true
-          });
-
           
-          socket.onopen = function () {
-              // console.log("Ready to go");
-              // console.log(socket.readyState);  
-              socket.send(mensaje);
-          };
+          
+          socket.onopen = () => {
+        	  if(socket.readyState === 1) {
+				/**
+				 * Si el socket está listo, muestro la ventana de carga
+				 * y le envio el mensaje al socket
+				 */
+				 this.setState({
+					loading: true
+					});
+
+				socket.send(mensaje);
+			  }
+		  };
+		  
           var json_puertos;
           socket.onmessage = (event) => {
               json_puertos = JSON.parse(event.data);
@@ -124,8 +126,7 @@ class ScanPortFormx extends Component {
           socket.onclose = function (event) {
               console.log("WebSocket is closed now.");
           };
-        };
-	}
+	};
 	
 	  
 
@@ -207,7 +208,6 @@ class ScanPortFormx extends Component {
 								this.state.loading &&	 <Loadingx time = {this.state.portFinal - this.state.portInitial}/>
 								
 						}
-						
             </div>
         </section>
     );
