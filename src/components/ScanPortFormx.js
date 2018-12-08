@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import Loadingx from './Loadingx';
 
-
 class ScanPortFormx extends Component {
 	
   constructor () {
@@ -61,60 +60,71 @@ class ScanPortFormx extends Component {
 
   handleSubmit(e) {
 		e.preventDefault();	// evita refrescar la pantalla al hacer submit
-	
-		/**
-		 * Inicializo el mensaje IP - Rango
-		 */
-		
-		this.host = this.state.ip;
-		this.host = this.host.concat("-");
-		this.pinicio = this.state.portInitial;
-		this.fin = this.state.portFinal;
-		
-		this.host = this.host.concat(this.pinicio);
-		this.host = this.host.concat(":");
-		var mensaje = this.host.concat(this.fin);		
-
-
-		/**
-		 * Seteo la aparicion del loading
-		*/
-			
-		this.setState({
-			loading: true
-		});
-
 		/** 
 		 * Creo el socket y le envío el mensaje
 		*/
 		var socket = new WebSocket('ws://127.0.0.1:4565');
+        socket.onerror = function () {
+            console.log("Servidor no disponible");
+        };    
+    
+        if(socket.readyState === 1) {
+          
+          /**
+           * Inicializo el mensaje IP - Rango
+           */
 
-		socket.onopen = function () {
-			console.log("Ready to go");
-			console.log(socket.readyState);  
-			socket.send(mensaje);
-		};
-		var json_puertos;
-		socket.onmessage = (event) => {
-			json_puertos = JSON.parse(event.data);
-			this.props.onScan(json_puertos);
+          this.host = this.state.ip;
+          this.host = this.host.concat("-");
+          if(this.state.portInitial < this.state.portFinal) {
+              this.pinicio = this.state.portInitial;console.log("Normal");
+              this.fin = this.state.portFinal;
+          } else {
+              this.pinicio = this.state.portFinal;console.log("Invertidos");
+              this.fin = this.state.portInitial;
+          }
 
-			/**
-			 * Quito el loading
-			 */
-			this.setState({
-				loading: false
-			});
+          this.host = this.host.concat(this.pinicio);
+          this.host = this.host.concat(":");
+          var mensaje = this.host.concat(this.fin);		
 
-			//scroll al reporte cuando ya se pudo obtener el json
-			$('html, body').animate({
-				scrollTop: $("#Report").offset().top
-			}, 1500);
-		};
-		
-		socket.onclose = function (event) {
-			console.log("WebSocket is closed now.");
-		};
+
+          /**
+           * Seteo la aparicion del loading
+          */
+
+          this.setState({
+              loading: true
+          });
+
+          
+          socket.onopen = function () {
+              // console.log("Ready to go");
+              // console.log(socket.readyState);  
+              socket.send(mensaje);
+          };
+          var json_puertos;
+          socket.onmessage = (event) => {
+              json_puertos = JSON.parse(event.data);
+              this.props.onScan(json_puertos);
+
+              /**
+               * Quito el loading
+               */
+              this.setState({
+                  loading: false
+              });
+
+              //scroll al reporte cuando ya se pudo obtener el json
+              $('html, body').animate({
+                  scrollTop: $("#Report").offset().top
+              }, 1500);
+          };
+
+          socket.onclose = function (event) {
+              console.log("WebSocket is closed now.");
+          };
+        };
 	}
 	
 	  

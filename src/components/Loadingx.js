@@ -7,14 +7,14 @@ class Loadingx extends React.Component{
 
 	render(){
         const renderer = ({minutes, seconds}) => {
-            return <span>{minutes}:{seconds}</span>
+            return <span>Espera de: {minutes}:{seconds}</span>
         }
             
 		return(	
 			<Section>
 					<Article>
 							<ReactLoading type="spinningBubbles" color="#007bff" />
-							Procesando puertos...
+							<span>Procesando puertos...</span>
                              <Countdown date={Date.now() + (263*this.props.time)} renderer={renderer} />
                              
 					</Article>
