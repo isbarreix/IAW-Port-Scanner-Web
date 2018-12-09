@@ -77,10 +77,10 @@ class ScanPortFormx extends Component {
           this.host = this.state.ip;
           this.host = this.host.concat("-");
           if(this.state.portInitial < this.state.portFinal) {
-              this.pinicio = this.state.portInitial;console.log("Normal");
+              this.pinicio = this.state.portInitial;
               this.fin = this.state.portFinal;
           } else {
-              this.pinicio = this.state.portFinal;console.log("Invertidos");
+              this.pinicio = this.state.portFinal;
               this.fin = this.state.portInitial;
           }
 

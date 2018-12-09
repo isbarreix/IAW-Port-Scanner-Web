@@ -317,6 +317,14 @@ Pricing tables & lists
     right: -100px;
 }
 
+.overlay2 {
+    max-width: 15% !important;
+    height: auto;
+    margin-top: 130px;  
+    position: absolute;
+    left: 100px;
+}
+
 ::selection {
     color: #fff;
     text-shadow: none;

@@ -50,6 +50,7 @@ class Reportx extends Component {
       return (
         <section className="bg-light" id="Report">
             <div className="container">
+                <img className="center img-fluid overlay2 wow bounceInLeft" src="img/form.png" alt="report"/>
                 <div className="row mb-3 hidden-sm-down wow fadeIn">
                   <div className="col-md-6 col-sm-8 mx-auto text-center wow fadeIn">
                       <h2 className="text-primary">Reporte</h2>
