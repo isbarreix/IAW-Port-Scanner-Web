@@ -49,7 +49,7 @@ class ScanPortFormx extends Component {
 		
       if(v === '2') {
           this.setState({
-              'portInitial': '0',
+              'portInitial': '1',
               'portFinal': '1000'
           }, () => {
               $('[name="portInitial"]').prop('disabled', true);
@@ -58,7 +58,7 @@ class ScanPortFormx extends Component {
       }
       else {
           this.setState({
-              'portInitial': '0',
+              'portInitial': '1',
               'portFinal': '443'
           }, () => {
               $('[name="portInitial"]').prop('disabled', true);
