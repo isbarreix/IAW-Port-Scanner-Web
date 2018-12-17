@@ -12,7 +12,7 @@ class Downloadx extends Component {
 							Descargá gratis SPYGLASS para escanear direcciones IP y puertos a la mayor velocidad posible. Accede al repositorio de la aplicación.
                         </p>
                         <p className="mt-5">
-                            <a href="https://github.com/isbarreix/IAW-Port-Scanner" className="mr-2 page-scroll"><img src="img/repositorio.png" className="store-img" alt="androidownload"/></a>
+                            <a href="https://github.com/isbarreix/IAW-Port-Scanner" target="_blank" className="mr-2 page-scroll"><img src="img/repositorio.png" className="store-img" alt="androidownload"/></a>
                          
                         </p>
                     </div>

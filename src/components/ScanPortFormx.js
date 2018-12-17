@@ -46,13 +46,26 @@ class ScanPortFormx extends Component {
   handlePortsToScanChange(e) {
 	var v = e.target.value;
 	if(v === '2' || v ==='3') {
-		this.setState({
-			'portInitial': '0',
-			'portFinal': '1000'
-		}, () => {
-            $('[name="portInitial"]').prop('disabled', true);
-            $('[name="portFinal"]').prop('disabled', true);
-        })
+		
+      if(v === '2') {
+          this.setState({
+              'portInitial': '0',
+              'portFinal': '1000'
+          }, () => {
+              $('[name="portInitial"]').prop('disabled', true);
+              $('[name="portFinal"]').prop('disabled', true);
+          })
+      }
+      else {
+          this.setState({
+              'portInitial': '0',
+              'portFinal': '443'
+          }, () => {
+              $('[name="portInitial"]').prop('disabled', true);
+              $('[name="portFinal"]').prop('disabled', true);
+          })
+      }
+      
 	} else {
             $('[name="portInitial"]').prop('disabled', false);
             $('[name="portFinal"]').prop('disabled', false);
