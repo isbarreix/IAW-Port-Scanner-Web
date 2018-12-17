@@ -19,7 +19,8 @@ class Reportx extends Component {
     html2canvas(document.querySelector("#datos")).then(canvas =>{
         const imgData = canvas.toDataURL('image/png');
         const pdf = new jsPDF({
-          orientation: 'landscape'});
+          orientation: 'landscape',
+        });
         pdf.addImage(imgData, 'PNG', 0, 0);
         pdf.save(this.props.host.IP+" - Report.pdf"); 
     });
